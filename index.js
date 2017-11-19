@@ -1,4 +1,5 @@
-import { AppRegistry } from 'react-native';
-import App from './App';
+//@flow
+import { AppRegistry } from 'react-native'
+import Balyabaca from 'balyabyaca/app/App'
 
-AppRegistry.registerComponent('balyabyaca', () => App);
+AppRegistry.registerComponent('balyabyaca', () => Balyabaca)
