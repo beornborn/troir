@@ -1,0 +1,24 @@
+fastlane_require 'json'
+
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
+# All available actions: https://docs.fastlane.tools/actions
+# can also be listed using the `fastlane actions` command
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+fastlane_version '2.55.0'
+
+default_platform :android
+
+file = File.read('../app/src/main/res/values/.config.json')
+config = JSON.parse(file)
+
+lane :alpha do
+  gradle(task: 'assembleRelease')
+
+  hockey(
+    api_token: config['HOCKEYAPP_API_TOKEN']
+  )
+end
