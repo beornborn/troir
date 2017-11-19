@@ -1,8 +1,8 @@
 //@flow
 import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import AppReducer from 'balyabyaca/app/reducers'
-import sagas from 'balyabyaca/app/sagas'
+import AppReducer from 'troir/app/reducers'
+import sagas from 'troir/app/sagas'
 import { createLogger } from 'redux-logger'
 
 console.disableYellowBox = true

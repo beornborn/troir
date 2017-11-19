@@ -1,5 +1,5 @@
 //@flow
 import { AppRegistry } from 'react-native'
-import Balyabaca from 'balyabyaca/app/App'
+import Troir from 'troir/app/App'
 
-AppRegistry.registerComponent('balyabyaca', () => Balyabaca)
+AppRegistry.registerComponent('troir', () => Troir)

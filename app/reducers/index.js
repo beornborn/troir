@@ -1,9 +1,9 @@
 //@flow
 import { combineReducers } from 'redux'
-import data from 'balyabyaca/app/reducers/Data'
-import ui from 'balyabyaca/app/reducers/Ui'
-import app from 'balyabyaca/app/reducers/App'
-import { navReducer as nav } from 'balyabyaca/app/__config/routes'
+import data from 'troir/app/reducers/Data'
+import ui from 'troir/app/reducers/Ui'
+import app from 'troir/app/reducers/App'
+import { navReducer as nav } from 'troir/app/__config/routes'
 import { reducer as form } from 'redux-form'
 
 const RootReducer = combineReducers({

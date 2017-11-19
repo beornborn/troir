@@ -1,6 +1,6 @@
 //@flow
 import { connect } from 'react-redux'
-import Root from 'balyabyaca/app/components/Root'
+import Root from 'troir/app/components/Root'
 
 export const mapStateToProps = (_state: Object): Object => ({
 

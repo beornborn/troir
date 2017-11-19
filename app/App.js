@@ -3,8 +3,8 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import Orientation from 'react-native-orientation'
 
-import Root from 'balyabyaca/app/containers/Root'
-import store from 'balyabyaca/app/Store'
+import Root from 'troir/app/containers/Root'
+import store from 'troir/app/Store'
 
 export default class App extends React.Component<{}> {
   componentDidMount() {

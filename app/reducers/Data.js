@@ -1,5 +1,5 @@
 //@flow
-// import u from 'balyabyaca/app/utils/ImmutabilityHelper'
+// import u from 'troir/app/utils/ImmutabilityHelper'
 // import { createAction as ca } from 'redux-actions'
 
 const initialState = {

@@ -1,4 +1,4 @@
-package com.balyabyaca;
+package com.troir;
 
 import android.app.Application;
 

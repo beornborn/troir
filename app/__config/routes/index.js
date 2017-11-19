@@ -1,6 +1,6 @@
 //@flow
 import { StackNavigator } from 'react-navigation'
-import Game from 'balyabyaca/app/components/game/Game'
+import Game from 'troir/app/components/game/Game'
 
 export const AllNavigators = StackNavigator({
   Game: {
