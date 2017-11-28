@@ -43,25 +43,3 @@ const PlayGame = function* PlayGame(): Generator<*,*,*> {
 }
 
 export default PlayGame
-
-
-    // prompt = TTY::Prompt.new
-    // initial_state = InitialDealer.do_initial_deal(players_num)
-    // state = initial_state.deep_dup
-    // moves = []
-
-    // GameDescriber.describe_state(state)
-    // (1..players_num).cycle do |player|
-    //   move_decider = player == 1 ? MoveDeciderManual : MoveDeciderAuto
-    //   move = move_decider.decide_move(state, player)
-    //   GameDescriber.describe_move(move)
-    //   moves << move
-    //   state = MoveApplier.apply_move(state, move)
-    //   state = WinnerChecker.check_winner(state)
-
-    //   GameDescriber.describe_state(state)
-    //   break if state[:winner]
-    // end
-
-    // ap "победил #{state[:winner]}"
-    // [initial_state, state, moves]

@@ -37,31 +37,3 @@ const DecideMove = function* DecideMove(): Generator<*,*,*> {
 }
 
 export default DecideMove
-
-
-
-    // new_card = state[:deck].last
-    // hand_cards = state[:players][player][:hand] + [new_card]
-    // available_choice = hand_cards - [8] # don't lose treasure
-    // dragon_with_troll_gaz = available_choice.include?(7) && (available_choice & [5,6]).present?
-    // card = dragon_with_troll_gaz ? 7 : available_choice.sample
-
-    // players = state[:players].keys
-    // players = players.select {|p| !state[:players][p][:lost] }
-    // target_player = case card
-    // when 1,2,3,6
-    //   (players - [player]).sample
-    // when 4,7
-    //   nil
-    // when 5
-    //   players.sample
-    // end
-
-    // target_card = case card
-    // when 1
-    //   (2..8).to_a.sample
-    // else
-    //   nil
-    // end
-
-    // [card, target_player, target_card, player, new_card]
