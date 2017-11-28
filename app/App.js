@@ -3,7 +3,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import Orientation from 'react-native-orientation'
 
-import Root from 'troir/app/containers/Root'
+import Game from 'troir/app/containers/game/Game'
 import store from 'troir/app/Store'
 
 export default class App extends React.Component<{}> {
@@ -13,7 +13,7 @@ export default class App extends React.Component<{}> {
 
   render() {
     return <Provider store={store}>
-      <Root />
+      <Game />
     </Provider>
   }
 }
