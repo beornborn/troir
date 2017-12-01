@@ -1,11 +1,9 @@
 //@flow
 import _ from 'lodash'
-import { put } from 'redux-saga/effects'
-import { dealCards } from 'troir/app/reducers/App'
 
 const DECK = [1, 1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 7, 8]
 
-const DealCards = function* DealCards(): Generator<*,*,*> {
+export const dealCards = () => {
   const deck = _.shuffle(DECK)
   const hiddenCard = deck.pop()
   const openCards = deck.splice(-3, 3)
@@ -43,7 +41,5 @@ const DealCards = function* DealCards(): Generator<*,*,*> {
   }, {})
   console.log('DEAL', {openCards, hiddenCard, players: pdata})
 
-  yield put(dealCards(state))
+  return state
 }
-
-export default DealCards

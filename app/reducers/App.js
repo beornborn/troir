@@ -7,10 +7,10 @@ const DRAW_CARD = 'app/DRAW_CARD'
 const APPLY_MOVE = 'app/APPLY_MOVE'
 const SET_WINNER = 'app/SET_WINNER'
 
-export const dealCards = (state: Object) => ca(DEAL_CARDS)({state})
-export const drawCard = (state: Object) => ca(DRAW_CARD)({state})
-export const applyMove = (state: Object) => ca(APPLY_MOVE)({state})
-export const setWinner = (winner: number) => ca(SET_WINNER)({winner})
+export const dealCardsApp = (state: Object) => ca(DEAL_CARDS)({state})
+export const drawCardApp = (state: Object) => ca(DRAW_CARD)({state})
+export const applyMoveApp = (state: Object) => ca(APPLY_MOVE)({state})
+export const setWinnerApp = (winner: number) => ca(SET_WINNER)({winner})
 
 const initialState = {
   gameSettings: {

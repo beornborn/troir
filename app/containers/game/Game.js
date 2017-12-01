@@ -1,7 +1,7 @@
 //@flow
 import { connect } from 'react-redux'
 import Game from 'troir/app/components/game/Game'
-import { initGame } from 'troir/app/reducers/Saga'
+import { initGameSaga } from 'troir/app/reducers/Saga'
 import { getCurrentState } from 'troir/app/reducers/selectors/App'
 
 export const mapStateToProps = (state: Object): Object => ({
@@ -9,7 +9,7 @@ export const mapStateToProps = (state: Object): Object => ({
 })
 
 export const mapDispatchToProps = (dispatch: Function): Object => ({
-  initGame: () => dispatch(initGame())
+  initGame: () => dispatch(initGameSaga())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game)

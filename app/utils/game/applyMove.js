@@ -1,12 +1,8 @@
 //@flow
 import _ from 'lodash'
-import { put, select } from 'redux-saga/effects'
-import { applyMove } from 'troir/app/reducers/App'
-import { getCurrentState } from 'troir/app/reducers/selectors/App'
 
-const ApplyMove = function* ApplyMove(move: Object): Generator<*,*,*> {
+export const applyMove = (move: Object, originalState: Object) => {
   const { card, targetPlayerNum, targetCard } = move
-  const originalState = yield select(getCurrentState)
   const state = _.cloneDeep(originalState)
   const { currentPlayer: currentPlayerId } = state
   const player = state.players[currentPlayerId]
@@ -72,7 +68,5 @@ const ApplyMove = function* ApplyMove(move: Object): Generator<*,*,*> {
 
   state.currentPlayer = state.currentPlayer === 1 ? 2 : 1
 
-  yield put(applyMove(state))
+  return state
 }
-
-export default ApplyMove
