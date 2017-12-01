@@ -17,8 +17,8 @@ export const ActiveArea = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: ${height/1.5}px;
-  width: ${width/1.2}px;
+  height: ${height / 1.5}px;
+  width: ${width / 1.2}px;
   background-color: #ddd;
   opacity: 0.8;
   ${debug}

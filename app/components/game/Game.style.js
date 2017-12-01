@@ -14,8 +14,13 @@ export const Container = styled.View`
 export const Row = styled.View`
   flex-direction: row;
   align-items: center;
-  height: ${height/5};
+  height: ${height / 5};
   width: ${width};
   background-color: #aaa;
   ${debug}
+`
+export const PlayAgain = styled.Text`
+  color: #2f8dff;
+  width: 50px;
+  margin-left: 20px;
 `

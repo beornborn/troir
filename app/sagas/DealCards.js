@@ -1,46 +1,49 @@
 //@flow
 import _ from 'lodash'
 import { put } from 'redux-saga/effects'
-import { setCurrentState } from 'troir/app/reducers/App'
+import { dealCards } from 'troir/app/reducers/App'
 
 const DECK = [1, 1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 7, 8]
 
 const DealCards = function* DealCards(): Generator<*,*,*> {
-  const gameDeck = _.shuffle(DECK)
-  const hiddenCard = gameDeck.pop()
-  const openCards = gameDeck.splice(-3, 3)
-
-  var data = [];
-  var length = 5; // user defined length
+  const deck = _.shuffle(DECK)
+  const hiddenCard = deck.pop()
+  const openCards = deck.splice(-3, 3)
 
   const player_nums = []
-  for (let i = 1; i <= 2; i++) {
+  for (let i = 1; i <= 2; i += 1) {
     player_nums.push(i)
   }
 
-  const players = _.reduce(player_nums, (pl, num) => {
-    pl[num] = {
+  const players = _.reduce(player_nums, (result, num) => {
+    result[num] = { // eslint-disable-line
       num,
       type: num === 1 ? 'user' : 'ai',
-      hand: [gameDeck.pop()],
+      hand: [deck.pop()],
       table: [],
       ring: false,
       lost: false,
       showCardsTo: [],
     }
-    return pl
+    return result
   }, {})
 
-  const initialState = {
-    deck: gameDeck,
-    hiddenCard: hiddenCard,
-    openCards: openCards,
+  const state = {
+    deck,
+    hiddenCard,
+    openCards,
     currentPlayer: 1,
-    players: players,
+    players,
     winner: null,
   }
 
-  yield put(setCurrentState(initialState))
+  const pdata = _.reduce(players, (result, value, key) => {
+    result[key] = value.hand[0] // eslint-disable-line
+    return result
+  }, {})
+  console.log('DEAL', {openCards, hiddenCard, players: pdata})
+
+  yield put(dealCards(state))
 }
 
 export default DealCards

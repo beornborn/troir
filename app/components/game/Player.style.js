@@ -1,9 +1,6 @@
 //@flow
 import styled from 'styled-components/native'
-import { Dimensions } from 'react-native'
 import { debug } from 'troir/app/components/__shared/Common.style'
-
-const { height, width } = Dimensions.get('window')
 
 const getBackgroundColor = (winner: boolean, ring: boolean) => {
   if (winner) {

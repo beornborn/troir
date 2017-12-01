@@ -42,7 +42,10 @@ module.exports = {
     'no-unused-vars': [ERROR, { 'vars': 'all', 'args': 'after-used', 'argsIgnorePattern': '^_' }],
     'comma-spacing': OFF,
     'comma-dangle': OFF,
+    'function-paren-newline': OFF,
+    'prefer-destructuring': OFF,
     'object-curly-spacing': OFF,
+    'object-curly-newline': OFF,
     'arrow-parens': OFF,
     'new-cap': OFF,
     'spaced-comment': OFF,
@@ -65,7 +68,7 @@ module.exports = {
     'no-restricted-properties': OFF,
     'no-restricted-syntax': OFF,
     'no-use-before-define': OFF,
-    'brace-style': [ERROR, '1tbs', {allowSingleLine: true}],
+    'brace-style': OFF,
     'no-multi-spaces': [ERROR, {ignoreEOLComments: true}],
     'indent': ['error', ERROR, {SwitchCase: 1}],
     'no-mixed-operators': OFF,
@@ -86,6 +89,7 @@ module.exports = {
     'react/sort-comp': OFF,
     'react/jsx-closing-bracket-location': [ERROR, 'after-props'],
     'react/jsx-wrap-multilines': OFF,
+    'react/no-array-index-key': OFF,
     'react/jsx-filename-extension': [ERROR, { 'extensions': ['.js', '.jsx'] }],
     'jsx-a11y/no-static-element-interactions': OFF
   }

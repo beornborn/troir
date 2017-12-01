@@ -1,11 +1,10 @@
 //@flow
 import React from 'react'
 import pt from 'prop-types'
-import { View, Modal, TouchableOpacity } from 'react-native'
-import _ from 'lodash'
+import { Modal, TouchableOpacity } from 'react-native'
 import Card from 'troir/app/components/game/Card'
 import { getAvailablePlayers } from 'troir/app/utils/helpers'
-import { Text, Avatar } from 'troir/app/components/__shared/Common.style'
+import { Avatar } from 'troir/app/components/__shared/Common.style'
 import { Container, ActiveArea, Players, AvatarContainer, Cards, CardsRow, CardContainer } from './TuneMoveModal.style'
 
 export default class TuneMoveModal extends React.Component<*, *> {
@@ -13,6 +12,7 @@ export default class TuneMoveModal extends React.Component<*, *> {
     modal: pt.object.isRequired,
     currentState: pt.object.isRequired,
     toggleTuneMoveModal: pt.func.isRequired,
+    applyMove: pt.func.isRequired,
   }
 
   state = {player: 0, card: 0}
@@ -21,11 +21,14 @@ export default class TuneMoveModal extends React.Component<*, *> {
     const { modal, applyMove, toggleTuneMoveModal, currentState } = this.props
 
     const availablePlayers = getAvailablePlayers(currentState, modal.card)
-    const newUpdate = availablePlayers.length === 1 ? {...stateUpdate, player: availablePlayers[0].num}: stateUpdate
+    let newUpdate = {...stateUpdate}
+    if (availablePlayers.length === 1) {
+      newUpdate = {...stateUpdate, player: availablePlayers[0].num}
+    }
 
     this.setState(newUpdate, () => {
       const { player, card } = this.state
-      if (player && card) {
+      if (player && (card || [5,6].includes(modal.card))) {
         applyMove(modal.card, player, card)
         toggleTuneMoveModal()
         this.setState({player: 0, card: 0})
@@ -55,6 +58,10 @@ export default class TuneMoveModal extends React.Component<*, *> {
   renderCards() {
     const { modal } = this.props
 
+    if ([5,6].includes(modal.card)) {
+      return null
+    }
+
     const firstRow = modal.card === 1 ? [2,3,4] : [1,2,3,4]
 
     return <Cards>
@@ -80,8 +87,8 @@ export default class TuneMoveModal extends React.Component<*, *> {
   }
 
   render() {
-    const { modal, toggleTuneMoveModal } = this.props
-    const { card, open } = modal
+    const { modal } = this.props
+    const { open } = modal
 
     return <Modal
       visible={open}

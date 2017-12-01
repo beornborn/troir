@@ -13,6 +13,7 @@ export const getAvailablePlayers = (state: Object, card: number) => {
 }
 
 export const getWinner = (state: Object) => {
+  console.log('WINNER CHECK STATE', state)
   const players = _.values(state.players)
   const livePlayers = players.filter(x => !x.lost)
 
@@ -32,4 +33,17 @@ export const getWinner = (state: Object) => {
     const maxSumPlayers = _.maxBy(maxCardPlayers, x => _.sum(x.table))
     return maxSumPlayers[0].num
   }
+}
+
+export const doDrawCard = (originalState: Object) => {
+  const state = _.cloneDeep(originalState)
+  const player = state.players[state.currentPlayer]
+  let newCard = state.deck.pop()
+  if (!newCard) {
+    newCard = state.hiddenCard
+    state.hiddenCard = undefined
+  }
+  player.hand.push(newCard)
+  console.log('DRAW CARD', newCard)
+  return state
 }

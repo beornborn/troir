@@ -1,7 +1,6 @@
 //@flow
 import _ from 'lodash'
-import { put, select } from 'redux-saga/effects'
-import { setCurrentState } from 'troir/app/reducers/App'
+import { select } from 'redux-saga/effects'
 import { getCurrentState } from 'troir/app/reducers/selectors/App'
 
 const DecideMove = function* DecideMove(): Generator<*,*,*> {
@@ -33,7 +32,7 @@ const DecideMove = function* DecideMove(): Generator<*,*,*> {
     targetCard = _.sample([2,3,4,5,6,7,8])
   }
 
-  return { card, player: _.get(targetPlayer, 'num'), targetCard }
+  return { card, targetPlayerNum: _.get(targetPlayer, 'num'), targetCard }
 }
 
 export default DecideMove

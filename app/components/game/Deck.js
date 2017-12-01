@@ -1,7 +1,6 @@
 //@flow
 import React from 'react'
 import pt from 'prop-types'
-import { View } from 'react-native'
 import { Text } from 'troir/app/components/__shared/Common.style'
 import { Container } from './Card.style'
 

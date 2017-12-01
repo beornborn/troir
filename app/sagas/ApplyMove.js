@@ -1,16 +1,16 @@
 //@flow
 import _ from 'lodash'
 import { put, select } from 'redux-saga/effects'
-import { setCurrentState } from 'troir/app/reducers/App'
+import { applyMove } from 'troir/app/reducers/App'
 import { getCurrentState } from 'troir/app/reducers/selectors/App'
 
 const ApplyMove = function* ApplyMove(move: Object): Generator<*,*,*> {
-  const { card, player: targetPlayerId, targetCard } = move
+  const { card, targetPlayerNum, targetCard } = move
   const originalState = yield select(getCurrentState)
   const state = _.cloneDeep(originalState)
   const { currentPlayer: currentPlayerId } = state
   const player = state.players[currentPlayerId]
-  const targetPlayer = state.players[targetPlayerId]
+  const targetPlayer = state.players[targetPlayerNum]
 
   player.ring = false
   player.showCardsTo = []
@@ -22,9 +22,11 @@ const ApplyMove = function* ApplyMove(move: Object): Generator<*,*,*> {
 
   switch (card) {
     case 1:
+      console.log('CASE 1', targetPlayer.hand.includes(targetCard), targetPlayer.ring)
       if (targetPlayer.hand.includes(targetCard) && !targetPlayer.ring) {
         targetPlayer.lost = true
       }
+      console.log('CASE 1', targetPlayer, state)
       break
     case 2:
       if (!targetPlayer.ring) {
@@ -33,20 +35,14 @@ const ApplyMove = function* ApplyMove(move: Object): Generator<*,*,*> {
       break
     case 3:
       if (!targetPlayer.ring) {
-        let lostPlayer
         if (player.hand[0] > targetPlayer.hand[0]) {
-          lostPlayer = targetPlayer
+          targetPlayer.lost = true
         } else if (player.hand[0] < targetPlayer.hand[0]) {
-          lostPlayer = player
-        }
-
-        if (lostPlayer) {
-          lostPlayer.lost = true
-          lostPlayer.table.push(card)
-          lostPlayer.hand = []
+          player.lost = true
         }
 
         targetPlayer.showCardsTo.push(player.num)
+        player.showCardsTo.push(targetPlayer.num)
       }
       break
     case 4:
@@ -64,6 +60,7 @@ const ApplyMove = function* ApplyMove(move: Object): Generator<*,*,*> {
         player.hand = [targetPlayer.hand[0]]
         targetPlayer.hand = [temp]
         targetPlayer.showCardsTo.push(player.num)
+        player.showCardsTo.push(targetPlayer.num)
       }
       break
     case 7:
@@ -73,10 +70,9 @@ const ApplyMove = function* ApplyMove(move: Object): Generator<*,*,*> {
       break
   }
 
-  console.log('lost?', card, player, targetPlayer)
   state.currentPlayer = state.currentPlayer === 1 ? 2 : 1
 
-  yield put(setCurrentState(state))
+  yield put(applyMove(state))
 }
 
 export default ApplyMove

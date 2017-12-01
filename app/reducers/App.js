@@ -2,22 +2,24 @@
 import u from 'troir/app/utils/ImmutabilityHelper'
 import { createAction as ca } from 'redux-actions'
 
-const SET_CURRENT_STATE = 'app/SET_CURRENT_STATE'
-const ADD_MOVE = 'app/ADD_MOVE'
+const DEAL_CARDS = 'app/DEAL_CARDS'
+const DRAW_CARD = 'app/DRAW_CARD'
+const APPLY_MOVE = 'app/APPLY_MOVE'
+const SET_WINNER = 'app/SET_WINNER'
 
-export const setCurrentState = (state: Object) => ca(SET_CURRENT_STATE)({state})
-export const addMove = (card: number, player: ?number, targetCard: ?number) => ca(ADD_MOVE)({card, player, targetCard})
+export const dealCards = (state: Object) => ca(DEAL_CARDS)({state})
+export const drawCard = (state: Object) => ca(DRAW_CARD)({state})
+export const applyMove = (state: Object) => ca(APPLY_MOVE)({state})
+export const setWinner = (winner: number) => ca(SET_WINNER)({winner})
 
 const initialState = {
   gameSettings: {
     playersNum: 2,
   },
-  moves: [],
-  states: [],
   currentState: {
     deck: [],
     openCards: [],
-    hiddenCard: 0,
+    hiddenCard: undefined,
     currentPlayer: 0,
     players: {},
   },
@@ -26,42 +28,13 @@ const initialState = {
 export default function reducer(state: Object = initialState, action: Action) {
   const p = action.payload
   switch (action.type) {
-    case SET_CURRENT_STATE:
-      return u(state, {currentState: {$set: p.state}, states: {$push: [p.state]}})
+    case DEAL_CARDS:
+    case DRAW_CARD:
+    case APPLY_MOVE:
+      return u(state, {currentState: {$set: p.state}})
+    case SET_WINNER:
+      return u(state, {currentState: {winner: {$set: p.winner}}})
     default:
       return state
   }
 }
-
-
-// const a =  {
-//   deck: [1, 1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 7, 8],
-//   hidden_card: 1,
-//   open_cards: [1,1,1],
-//   currentPlayer: 1,
-//   players: {
-//     '1': {
-//       type: 'user',
-//       hand: [1],
-//       table: [],
-//       ring: false,
-//       lost: false,
-//       showCardsTo: [],
-//     }
-//   },
-//   winner: null,
-// }
-
-
-// START_GAME
-
-// initial_deal
-
-// while (no winner) {
-//   if currentPlayer !== 'user'
-//     delay and automove
-//   else
-//     take PLAYER_MOVE
-//     handle move
-//   end
-// }
