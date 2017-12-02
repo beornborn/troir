@@ -1,28 +1,29 @@
 //@flow
 import _ from 'lodash'
 
-export const applyMove = (move: Object, originalState: Object) => {
+export const applyMove = (move: Move, originalState: GameState): GameState => {
   const { card, targetPlayerNum, targetCard } = move
   const state = _.cloneDeep(originalState)
-  const { currentPlayer: currentPlayerId } = state
-  const player = state.players[currentPlayerId]
+  const player = state.players[state.currentPlayer]
   const targetPlayer = state.players[targetPlayerNum]
 
+  // ---------- reset effects
   player.ring = false
   player.showCardsTo = []
+
+  // ---------- put card on the table
   player.table.push(card)
   player.hand = _.difference(player.hand, [card])
   if (_.isEmpty(player.hand)) {
     player.hand = [card]
   }
 
+  // ---------- apply card
   switch (card) {
     case 1:
-      console.log('CASE 1', targetPlayer.hand.includes(targetCard), targetPlayer.ring)
       if (targetPlayer.hand.includes(targetCard) && !targetPlayer.ring) {
         targetPlayer.lost = true
       }
-      console.log('CASE 1', targetPlayer, state)
       break
     case 2:
       if (!targetPlayer.ring) {
@@ -66,6 +67,7 @@ export const applyMove = (move: Object, originalState: Object) => {
       break
   }
 
+  // ---------- rotate player
   state.currentPlayer = state.currentPlayer === 1 ? 2 : 1
 
   return state

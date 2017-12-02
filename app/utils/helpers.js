@@ -11,3 +11,11 @@ export const getAvailablePlayers = (state: Object, card: number) => {
 
   return []
 }
+
+export const logDealCards = (players: Players, openCards: Array<number>, hiddenCard: number) => {
+  const pdata = _.reduce(players, (result, value, key) => {
+    result[key] = value.hand[0] // eslint-disable-line
+    return result
+  }, {})
+  console.log('DEAL', {openCards, hiddenCard, players: pdata})
+}

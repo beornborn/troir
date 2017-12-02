@@ -15,7 +15,7 @@ const getRatio = (location: string) => {
 }
 
 export const Container = styled.View`
-  height: ${props => height * getRatio(props.location)};
+  height: ${props => 1.05 * height * getRatio(props.location)};
   width: ${props => width * getRatio(props.location)};
   align-items: center;
   justify-content: center;

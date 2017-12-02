@@ -4,10 +4,10 @@ import { bindActionCreators } from 'redux'
 import Player from 'troir/app/components/game/Player'
 import { applyMoveSaga } from 'troir/app/reducers/Saga'
 import { toggleTuneMoveModal } from 'troir/app/reducers/Ui'
-import { getCurrentState } from 'troir/app/reducers/selectors/App'
+import { getGameState } from 'troir/app/reducers/selectors/App'
 
 export const mapStateToProps = (state: Object): Object => ({
-  currentState: getCurrentState(state),
+  gameState: getGameState(state),
 })
 
 export const mapDispatchToProps = (dispatch: Function): Object => (

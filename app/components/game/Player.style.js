@@ -1,5 +1,6 @@
 //@flow
 import styled from 'styled-components/native'
+import { Dimensions } from 'react-native'
 import { debug } from 'troir/app/components/__shared/Common.style'
 
 const getBackgroundColor = (winner: boolean, ring: boolean) => {
@@ -11,9 +12,12 @@ const getBackgroundColor = (winner: boolean, ring: boolean) => {
   return '#555'
 }
 
+const { height } = Dimensions.get('window')
+
 export const Container = styled.View`
   background-color: ${p => getBackgroundColor(p.winner, p.ring)};
   margin: 5px;
+  height: ${height / 6.2}px;
   ${debug}
 `
 export const Cards = styled.View`

@@ -11,14 +11,14 @@ import { Container, Cards } from './Player.style'
 export default class Player extends React.Component<*> {
   static propTypes = {
     player: pt.object.isRequired,
-    currentState: pt.object.isRequired,
+    gameState: pt.object.isRequired,
     toggleTuneMoveModal: pt.func.isRequired,
     applyMove: pt.func.isRequired,
   }
 
   pickCard(card: number) {
-    const { toggleTuneMoveModal, applyMove, currentState } = this.props
-    const availablePlayers = getAvailablePlayers(currentState, card)
+    const { toggleTuneMoveModal, applyMove, gameState } = this.props
+    const availablePlayers = getAvailablePlayers(gameState, card)
 
     if ([4,7,8].includes(card)) {
       applyMove(card)
@@ -30,17 +30,17 @@ export default class Player extends React.Component<*> {
   }
 
   renderPlayerCard = (card: number, i: number) => {
-    const { player, currentState } = this.props
-    const show = player.num === 1 || player.showCardsTo.includes(1) || currentState.winner
+    const { player, gameState } = this.props
+    const show = player.num === 1 || player.showCardsTo.includes(1) && i === 0 || !!gameState.winner
     return <TouchableOpacity key={i} onPress={() => this.pickCard(card)} >
       <Card card={card} location='hand' show={show} />
     </TouchableOpacity>
   }
 
   render() {
-    const { player, currentState } = this.props
+    const { player, gameState } = this.props
 
-    return <Container winner={currentState.winner === player.num} ring={player.ring}>
+    return <Container winner={gameState.winner === player.num} ring={player.ring}>
       <Avatar type={player.type} />
       <Cards>
         {player.hand.map(this.renderPlayerCard)}

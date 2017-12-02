@@ -1,30 +1,28 @@
 //@flow
 import _ from 'lodash'
+import { logDealCards } from 'troir/app/utils/helpers'
 
 const DECK = [1, 1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 7, 8]
 
-export const dealCards = () => {
+export const dealCards = (): GameState => {
   const deck = _.shuffle(DECK)
   const hiddenCard = deck.pop()
   const openCards = deck.splice(-3, 3)
 
-  const player_nums = []
-  for (let i = 1; i <= 2; i += 1) {
-    player_nums.push(i)
-  }
+  const getPlayer = (num: number) => ({
+    num,
+    type: num === 1 ? 'user' : 'ai',
+    hand: [deck.pop()],
+    table: [],
+    ring: false,
+    lost: false,
+    showCardsTo: [],
+  })
 
-  const players = _.reduce(player_nums, (result, num) => {
-    result[num] = { // eslint-disable-line
-      num,
-      type: num === 1 ? 'user' : 'ai',
-      hand: [deck.pop()],
-      table: [],
-      ring: false,
-      lost: false,
-      showCardsTo: [],
-    }
-    return result
-  }, {})
+  const players = {
+    '1': getPlayer(1),
+    '2': getPlayer(2),
+  }
 
   const state = {
     deck,
@@ -35,11 +33,7 @@ export const dealCards = () => {
     winner: null,
   }
 
-  const pdata = _.reduce(players, (result, value, key) => {
-    result[key] = value.hand[0] // eslint-disable-line
-    return result
-  }, {})
-  console.log('DEAL', {openCards, hiddenCard, players: pdata})
+  logDealCards(players, openCards, hiddenCard)
 
   return state
 }

@@ -10,7 +10,7 @@ import { Container, ActiveArea, Players, AvatarContainer, Cards, CardsRow, CardC
 export default class TuneMoveModal extends React.Component<*, *> {
   static propTypes = {
     modal: pt.object.isRequired,
-    currentState: pt.object.isRequired,
+    gameState: pt.object.isRequired,
     toggleTuneMoveModal: pt.func.isRequired,
     applyMove: pt.func.isRequired,
   }
@@ -18,9 +18,9 @@ export default class TuneMoveModal extends React.Component<*, *> {
   state = {player: 0, card: 0}
 
   pick(stateUpdate: Object) {
-    const { modal, applyMove, toggleTuneMoveModal, currentState } = this.props
+    const { modal, applyMove, toggleTuneMoveModal, gameState } = this.props
 
-    const availablePlayers = getAvailablePlayers(currentState, modal.card)
+    const availablePlayers = getAvailablePlayers(gameState, modal.card)
     let newUpdate = {...stateUpdate}
     if (availablePlayers.length === 1) {
       newUpdate = {...stateUpdate, player: availablePlayers[0].num}
@@ -37,8 +37,8 @@ export default class TuneMoveModal extends React.Component<*, *> {
   }
 
   renderPlayers() {
-    const { currentState, modal } = this.props
-    const availablePlayers = getAvailablePlayers(currentState, modal.card)
+    const { gameState, modal } = this.props
+    const availablePlayers = getAvailablePlayers(gameState, modal.card)
 
     if (availablePlayers.length === 1) {
       return null

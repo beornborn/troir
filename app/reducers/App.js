@@ -16,7 +16,7 @@ const initialState = {
   gameSettings: {
     playersNum: 2,
   },
-  currentState: {
+  gameState: {
     deck: [],
     openCards: [],
     hiddenCard: undefined,
@@ -31,9 +31,9 @@ export default function reducer(state: Object = initialState, action: Action) {
     case DEAL_CARDS:
     case DRAW_CARD:
     case APPLY_MOVE:
-      return u(state, {currentState: {$set: p.state}})
+      return u(state, {gameState: {$set: p.state}})
     case SET_WINNER:
-      return u(state, {currentState: {winner: {$set: p.winner}}})
+      return u(state, {gameState: {winner: {$set: p.winner}}})
     default:
       return state
   }

@@ -1,8 +1,7 @@
 //@flow
 import _ from 'lodash'
 
-export const getWinner = (state: Object) => {
-  console.log('WINNER CHECK STATE', state)
+export const getWinner = (state: GameState): ?number => {
   const players = _.values(state.players)
   const livePlayers = players.filter(x => !x.lost)
 
@@ -19,7 +18,7 @@ export const getWinner = (state: Object) => {
       return maxCardPlayers[0].num
     }
 
-    const maxSumPlayers = _.maxBy(maxCardPlayers, x => _.sum(x.table))
-    return maxSumPlayers[0].num
+    const maxSumPlayer = _.maxBy(maxCardPlayers, x => _.sum(x.table))
+    return maxSumPlayer.num
   }
 }

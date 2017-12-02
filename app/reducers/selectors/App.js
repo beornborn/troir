@@ -1,2 +1,2 @@
 //@flow
-export const getCurrentState = (state: Object) => state.app.currentState
+export const getGameState = (state: Object) => state.app.gameState
